@@ -15,6 +15,11 @@
 #include <vector>
 #include <unordered_map>
 
+// Для сигнатуры serialize и deserialize
+#include "../libs/rapidjson/include/rapidjson/document.h"
+using namespace rapidjson;
+
+
 namespace vran
 {
     using srb_id_t   = uint8_t; // SRB Identity [0-2], mapping one by one to lcid for SRB
@@ -911,6 +916,9 @@ struct PathSwitchRequest
     uint32_t              src_mme_ue_s1ap_id;
     ErabsSwitchParameters erab_switch_list;
     SecurityCapabilities  security_capabilities;
+
+    void deserialize(const rapidjson::Document& config);
+    void serialize(Document& config);
 };
 
 struct HandoverCancel
